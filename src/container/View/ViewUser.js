@@ -21,17 +21,11 @@ const ViewUser = () => {
       className="viewContainer"
     >
       <div class="card">
-        <div
-          class="container"
-          style={{ display: "flex", justifyContent: "space-around" }}
-        >
+        <div class="container">
           <h5>Title:</h5>
           <p>{userData?.title}</p>
         </div>
-        <div
-          class="container"
-          style={{ display: "flex", justifyContent: "space-around" }}
-        >
+        <div class="container">
           <h5>Body:</h5> <p>{userData?.body}</p>
         </div>
       </div>
