@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-import "./dashboard.css";
+import "./styles.css";
 import Pagination from "../../component/Pagination";
 
 const Dashboard = () => {

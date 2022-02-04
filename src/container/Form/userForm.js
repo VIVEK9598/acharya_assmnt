@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import "./form.css";
+import { useParams, useNavigate } from "react-router";
+import "./styles.css";
 const UserForm = () => {
   const [userInput, setUserInput] = useState({ title: "", body: "" });
   const [isSubmitting, setSubmitting] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
@@ -45,32 +47,53 @@ const UserForm = () => {
   return (
     <>
       <div style={styles} className="formContainer">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="fname">Title</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Title"
-            value={userInput?.title}
-            onChange={handleChange}
-          />
-
-          <label htmlFor="body">body</label>
-          <input
-            type="text"
-            id="body"
-            name="body"
-            placeholder="Body"
-            value={userInput?.body}
-            onChange={handleChange}
-          />
+        <div className="card">
           <div style={styles}>
-            <button className="button" type="submit" disabled={isSubmitting}>
-              Submit
-            </button>
+            <h3>Edit user</h3>
           </div>
-        </form>
+          <div class="container">
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="fname">Title</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Title"
+                value={userInput?.title}
+                onChange={handleChange}
+              />
+
+              <label htmlFor="body">body</label>
+              <input
+                type="text"
+                id="body"
+                name="body"
+                placeholder="Body"
+                value={userInput?.body}
+                onChange={handleChange}
+              />
+              <div style={styles}>
+                <button
+                  className="button"
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  Submit
+                </button>
+              </div>
+              <div style={styles}>
+                <button
+                  onClick={() => navigate("/")}
+                  className="button"
+                  type="button"
+                  disabled={isSubmitting}
+                >
+                  Back
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </>
   );

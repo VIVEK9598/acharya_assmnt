@@ -5,6 +5,7 @@ body {
   border-radius: 5px;
   padding: 20px;
 }
+
 input[type="text"] {
   width: 100%;
   padding: 12px 20px;
@@ -15,7 +16,7 @@ input[type="text"] {
   box-sizing: border-box;
 }
 
-.button[type="submit"] {
+.button {
   width: 20%;
   background-color: #4a5dc9;
   color: white;
@@ -26,6 +27,6 @@ input[type="text"] {
   cursor: pointer;
 }
 
-.button[type="submit"]:hover {
+.button:hover {
   background-color: #223675;
 }
