@@ -6,7 +6,7 @@ import Pagination from "../../component/Pagination";
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
   const pageLimit = 10;
 
@@ -21,15 +21,22 @@ const Dashboard = () => {
   const handleEdit = (id) => {
     navigate(`/EditUser/${id}`);
   };
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure?")) {
+      axios
+        .delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then((res) => window.alert("Sucessfully deleted"));
+    }
+  };
 
-  const getPaginatedData =(data)=>{
-    const filteredData = data.filter((item, i)=>{
-        const startIndex = pageLimit * currentPage - pageLimit;
-        const endIndex = startIndex + pageLimit;
-        return i < endIndex && i >= startIndex
-    })
-     return filteredData
-}
+  const getPaginatedData = (data) => {
+    const filteredData = data.filter((item, i) => {
+      const startIndex = pageLimit * currentPage - pageLimit;
+      const endIndex = startIndex + pageLimit;
+      return i < endIndex && i >= startIndex;
+    });
+    return filteredData;
+  };
 
   const styles = {
     display: "flex",
@@ -59,15 +66,27 @@ const Dashboard = () => {
                   >
                     Edit
                   </button>
+                  <button
+                    style={{ marginLeft: 10 }}
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
-      <div style = {{padding:16, textAlign:"center"}}>
-        <Pagination data= {data} currentPage= {currentPage} handlePageChange={(nextPage)=>{setCurrentPage(nextPage)}} pageLimit={pageLimit} />
-
+      <div style={{ padding: 16, textAlign: "center" }}>
+        <Pagination
+          data={data}
+          currentPage={currentPage}
+          handlePageChange={(nextPage) => {
+            setCurrentPage(nextPage);
+          }}
+          pageLimit={pageLimit}
+        />
       </div>
     </div>
   );
